@@ -11,6 +11,8 @@ import { openCommentsModal } from "store/slices/view";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    backgroundColor: theme.palette.primary.main,
+    fontWeight: "700",
   },
 
   title: {
@@ -27,11 +29,11 @@ const Header = () => {
   return (
     <AppBar position="fixed" className={classes.root}>
       <Toolbar>
-        <Typography variant="h6" className={classes.title}>
+        <Typography variant="h5" className={classes.title}>
           Commentor
         </Typography>
 
-        <Button color="inherit" onClick={handleOpen}>
+        <Button color="inherit" variant="outlined" onClick={handleOpen}>
           Add Comment
         </Button>
       </Toolbar>

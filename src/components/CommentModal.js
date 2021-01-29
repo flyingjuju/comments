@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+
 import {
   closeCommentsModal,
   getViewCommentsModalOpen,
@@ -11,10 +14,24 @@ import {
 import { create } from "store/slices/comment";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    height: 300,
+    flexGrow: 1,
+    minWidth: 300,
+  },
   modal: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+  },
+  paper: {
+    width: "40%",
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(5),
+  },
+  block: {
+    display: "block",
+    margin: theme.spacing(2),
   },
 }));
 
@@ -35,6 +52,8 @@ const CommentModal = () => {
     handleClose();
   };
   return (
+    // <div className={classes.root}>
+
     <Modal
       open={isOpen}
       onClose={handleClose}
@@ -42,15 +61,34 @@ const CommentModal = () => {
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
-      {/* <p>Add Comments</p> */}
-      <form>
-        <label>name</label>
-        <input id="name"></input>
-        <label>comment</label>
-        <textarea id="comment"></textarea>
-        <button onClick={(e) => addComment(e)}>submit</button>
-      </form>
+      <div className={classes.paper}>
+        <TextField required id="name" label="Name" className={classes.block} />
+        <TextField
+          id="comment"
+          label="Comment"
+          multiline
+          className={classes.block}
+        />
+
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.block}
+          onClick={(e) => addComment(e)}
+        >
+          Send
+        </Button>
+      </div>
+
+      {/* <form>
+          <label>name</label>
+          <input id="name"></input>
+          <label>comment</label>
+          <textarea id="comment"></textarea>
+          <button onClick={(e) => addComment(e)}>submit</button>
+        </form> */}
     </Modal>
+    // </div>
   );
 };
 

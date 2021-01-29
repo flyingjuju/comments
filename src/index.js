@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import "index.css";
 import store from "store";
 import reportWebVitals from "reportWebVitals";
+import theme from "./theme";
 
 const rootEl = document.getElementById("root");
 
@@ -14,7 +15,7 @@ const render = () => {
 
   const wrappedApp = (
     <React.StrictMode>
-      <Provider store={store}>
+      <Provider store={store} theme={theme}>
         <App />
       </Provider>
     </React.StrictMode>

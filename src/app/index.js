@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import "app/App.css";
-import logo from "app/logo.svg";
 import Header from "components/Header";
 import CommentModal from "components/CommentModal";
 import Comment from "components/Comments";
@@ -15,11 +14,9 @@ function App() {
   return (
     <>
       <Header />
-
       <CommentModal />
 
       <div className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <Comment comments={comment} />
         <TopCommenters comments={comment} />
       </div>

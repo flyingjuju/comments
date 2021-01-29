@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
@@ -12,13 +11,20 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "70%",
-    // maxWidth: '36ch',
     backgroundColor: theme.palette.background.primary,
   },
-  avatar: {},
+  avatar: {
+    backgroundColor: "#e91e63",
+    fontWeight: "700",
+  },
   inline: {
     display: "inline",
-    color: theme.palette.primary,
+  },
+  block: {
+    display: "block",
+  },
+  subtitle: {
+    fontWeight: "500",
   },
 }));
 
@@ -36,19 +42,26 @@ const Comment = ({ comments }) => {
             </Avatar>
           </ListItemAvatar>
           <ListItemText
-            primary={comment.name}
+            primary={
+              <Typography
+                component="div"
+                variant="h6"
+                className={classes.subtitle}
+                color="textPrimary"
+              >
+                {comment.name}
+              </Typography>
+              // comment.name
+            }
             secondary={
-              <React.Fragment>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  className={classes.inline}
-                  color="textPrimary"
-                >
-                  {/* {comment.name} */}
-                </Typography>
+              <Typography
+                component="p"
+                variant="body1"
+                className={classes.inline}
+                color="textPrimary"
+              >
                 {comment.comment}
-              </React.Fragment>
+              </Typography>
             }
           />
         </ListItem>
