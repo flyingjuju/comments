@@ -8,6 +8,8 @@ import {
   getViewCommentsModalOpen,
 } from "store/slices/view";
 
+import { create } from "store/slices/comment";
+
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: "flex",
@@ -24,6 +26,14 @@ const CommentModal = () => {
 
   const handleClose = () => dispatch(closeCommentsModal());
 
+  const addComment = (e) => {
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const comment = document.getElementById("comment").value;
+    console.log(name, comment);
+    dispatch(create({ name, comment }));
+    handleClose();
+  };
   return (
     <Modal
       open={isOpen}
@@ -32,7 +42,14 @@ const CommentModal = () => {
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
-      <p>Add Comments</p>
+      {/* <p>Add Comments</p> */}
+      <form>
+        <label>name</label>
+        <input id="name"></input>
+        <label>comment</label>
+        <textarea id="comment"></textarea>
+        <button onClick={(e) => addComment(e)}>submit</button>
+      </form>
     </Modal>
   );
 };
