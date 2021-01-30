@@ -12,6 +12,7 @@ import {
 } from "store/slices/view";
 
 import { create } from "store/slices/comment";
+import { updateCommentor } from "store/slices/commentors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,6 +51,7 @@ const CommentModal = () => {
     const body = document.getElementById("comment").value;
     if (name.length > 0 && body.length > 0) {
       dispatch(create({ name, body }));
+      dispatch(updateCommentor({ name }));
       handleClose();
     }
   };

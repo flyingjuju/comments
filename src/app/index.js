@@ -6,11 +6,12 @@ import CommentModal from "components/CommentModal";
 import Comment from "components/Comments";
 import TopCommenters from "components/TopCommenters";
 import { commentSelector, fetchRandomComments } from "../store/slices/comment";
+import { commentorsSelector, getCommentors } from "../store/slices/commentors";
 
 function App() {
   const dispatch = useDispatch();
-  const { comment, loading, hasErrors } = useSelector(commentSelector);
-  // console.log("comment at app.js", comment);
+  const { comments, loading, hasErrors } = useSelector(commentSelector);
+  const { commentors } = useSelector(commentorsSelector);
 
   //fetch api data
   useEffect(() => {
@@ -21,11 +22,15 @@ function App() {
   const renderComments = () => {
     if (loading) return <p>Loading comments...</p>;
     if (hasErrors) return <p>Cannot display comments...</p>;
+    // get commentor object based on comments list
+    if (comments && Object.keys(commentors).length === 0) {
+      dispatch(getCommentors(comments));
+    }
 
     return (
       <div className="App-header">
-        <Comment comments={comment} />
-        <TopCommenters comments={comment} />
+        <Comment comments={comments} />
+        <TopCommenters commentors={commentors} />
       </div>
     );
   };

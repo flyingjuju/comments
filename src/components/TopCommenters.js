@@ -36,21 +36,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// calculate top commenters by creating commenters object and setting commenter name as the key and freqrency as the value.
-const TopCommenters = ({ comments }) => {
+// calculate top commenters based commentors object which the commentor name as the key and freqrency as the value.
+const TopCommenters = ({ commentors }) => {
   const classes = useStyles();
-
-  let commenters = {};
-  for (let i = 0; i < comments.length; i++) {
-    let comment = comments[i];
-    commenters[comment.name] = commenters[comment.name] + 1 || 1;
-  }
-
-  let topCommenters = Object.entries(commenters)
+  let topCommenters = Object.entries(commentors)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 3);
 
-  // console.log("here>>>>", topCommenters);
   return (
     <List
       className={classes.root}
