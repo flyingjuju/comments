@@ -9,7 +9,7 @@ const initialState = {
   // comment: mockComments,
   loading: false,
   hasErrors: false,
-  comment: [],
+  comments: [],
 };
 
 //control rendering api data, and create a new comment
@@ -21,7 +21,7 @@ const commentSlice = createSlice({
       state.loading = true;
     },
     getCommentSuccess: (state, { payload }) => {
-      state.comment = payload;
+      state.comments = payload;
       state.loading = false;
       state.hasErrors = false;
     },
@@ -31,12 +31,12 @@ const commentSlice = createSlice({
     },
     create(state, { payload }) {
       const { name, body } = payload;
-      state.comment.push({ name, body });
+      state.comments.push({ name, body });
     },
   },
 });
 
-export const commentSelector = (state) => state.comment;
+export const commentSelector = (state) => state.comments;
 
 export const {
   create,

@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Comment = ({ comments }) => {
   const classes = useStyles();
-  // console.log("comments at comment.js", comments);
+
   return (
     <List className={classes.root}>
       {comments &&
