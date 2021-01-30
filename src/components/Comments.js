@@ -1,5 +1,4 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -24,14 +23,13 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
   },
   subtitle: {
-    fontWeight: "500",
+    fontWeight: "600",
   },
 }));
 
 const Comment = ({ comments }) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  console.log("comments at comment.js", comments);
+  // console.log("comments at comment.js", comments);
   return (
     <List className={classes.root}>
       {comments &&

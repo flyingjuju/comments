@@ -42,16 +42,18 @@ const CommentModal = () => {
 
   const handleClose = () => dispatch(closeCommentsModal());
 
+  // use native form validation by adding required attribut to the input
+  // when inputs are valid, add new comment entry to list
+  // letter shall be sensitive in this case
   const addComment = (e) => {
-    // e.preventDefault();
     const name = document.getElementById("name").value.trim();
     const body = document.getElementById("comment").value;
-    // console.log(name, body);
     if (name.length > 0 && body.length > 0) {
       dispatch(create({ name, body }));
       handleClose();
     }
   };
+
   return (
     <Modal
       open={isOpen}
@@ -77,7 +79,7 @@ const CommentModal = () => {
           className={classes.block}
           onClick={(e) => addComment(e)}
         >
-          Send
+          Submit
         </Button>
       </form>
     </Modal>

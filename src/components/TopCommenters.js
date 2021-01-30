@@ -1,5 +1,4 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -7,7 +6,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
-import ListSubheader from "@material-ui/core/ListSubheader";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,11 +30,15 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0.5, 0.7),
     margin: theme.spacing(3),
   },
+  subheader: {
+    color: "rgba(0, 0, 0, 0.54)",
+    fontWeight: "600",
+  },
 }));
 
+// calculate top commenters by creating commenters obj and setting commenter name as the key and freqrency as the value.
 const TopCommenters = ({ comments }) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
 
   let commenters = {};
   for (let i = 0; i < comments.length; i++) {
@@ -48,15 +50,14 @@ const TopCommenters = ({ comments }) => {
     .sort((a, b) => b[1] - a[1])
     .slice(0, 3);
 
-  console.log("here>>>>", topCommenters);
-
+  // console.log("here>>>>", topCommenters);
   return (
     <List
       className={classes.root}
       subheader={
-        <ListSubheader component="div" id="nested-list-subheader">
+        <Typography variant="h6" className={classes.subheader}>
           Top Commenters
-        </ListSubheader>
+        </Typography>
       }
     >
       {topCommenters.length > 0 &&

@@ -8,9 +8,9 @@ const theme = createMuiTheme({
       dark: "#115293",
     },
     typography: {
-      primary: "#fff",
+      primary: "rgba(255, 255, 255, 0.5)",
       secondary: "rgba(255, 255, 255, 0.7)",
-      disabled: "rgba(255, 255, 255, 0.5)",
+      // disabled: "rgba(255, 255, 255, 0.5)",
       subtitle: {
         fontSize: 12,
       },

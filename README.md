@@ -1,6 +1,20 @@
 
 # AVB Frontend Assesment
 
+## Summary of application
+This commentor app allows users to read a list of comments, add a comment, and see a list of top three commenters.
+- It will first fetch 20 comments from api (https://jsonplaceholder.typicode.com/comments), and display the avatar(initial for the first name), name and comment body for each comment.
+- It allows user to add a comment to the list by clicking `add comment` button and compeleting the form. 
+(Please be aware that user can't leave any input empty to be able to submit the form)
+- Top commenter list will automatically calculate the top three commenters, and display the avatar(initial for the first name), name and comment counts for each top commenter.
+
+## Get Started
+
+- to install all pageages
+   run  `npm install`
+- to start application
+   run  `yarn start`
+
 ## User Story
 
 As a user, I would like to be able to read a list of comments, add a comment, and see a list of the top 3 commenters.
