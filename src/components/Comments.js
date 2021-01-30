@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.primary,
   },
   avatar: {
-    backgroundColor: "#e91e63",
+    backgroundColor: "#7986cb",
     fontWeight: "700",
   },
   inline: {
@@ -31,41 +31,42 @@ const useStyles = makeStyles((theme) => ({
 const Comment = ({ comments }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  console.log("comments at comment.js", comments);
   return (
     <List className={classes.root}>
-      {comments.map((comment) => (
-        <ListItem alignItems="flex-start" key={comment.id}>
-          <ListItemAvatar>
-            <Avatar alt={comment.name} className={classes.avatar}>
-              {comment.name.charAt(0)}
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText
-            primary={
-              <Typography
-                component="div"
-                variant="h6"
-                className={classes.subtitle}
-                color="textPrimary"
-              >
-                {comment.name}
-              </Typography>
-              // comment.name
-            }
-            secondary={
-              <Typography
-                component="p"
-                variant="body1"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                {comment.comment}
-              </Typography>
-            }
-          />
-        </ListItem>
-      ))}
+      {comments &&
+        comments.map((comment) => (
+          <ListItem alignItems="flex-start" key={comment.id} divider>
+            <ListItemAvatar>
+              <Avatar alt={comment.name} className={classes.avatar}>
+                {comment.name.charAt(0)}
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary={
+                <Typography
+                  component="div"
+                  variant="h6"
+                  className={classes.subtitle}
+                  color="textPrimary"
+                >
+                  {comment.name}
+                </Typography>
+              }
+              secondary={
+                <Typography
+                  component="p"
+                  variant="body1"
+                  className={classes.inline}
+                  color="textPrimary"
+                >
+                  {/* {comment.comment} */}
+                  {comment.body}
+                </Typography>
+              }
+            />
+          </ListItem>
+        ))}
     </List>
   );
 };

@@ -3,22 +3,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
+import ListSubheader from "@material-ui/core/ListSubheader";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "70%",
     backgroundColor: theme.palette.background.primary,
   },
+  avatar: {
+    backgroundColor: "#7986cb",
+    fontWeight: "700",
+  },
   inline: {
     display: "inline",
   },
   block: {
     display: "block",
+  },
+  count: {
+    display: "inline",
+    border: "1px solid grey",
+    boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.1)",
+    letterSpacing: "2.5px",
+    padding: theme.spacing(0.5, 0.7),
+    margin: theme.spacing(3),
   },
 }));
 
@@ -39,12 +51,21 @@ const TopCommenters = ({ comments }) => {
   console.log("here>>>>", topCommenters);
 
   return (
-    <List className={classes.root}>
+    <List
+      className={classes.root}
+      subheader={
+        <ListSubheader component="div" id="nested-list-subheader">
+          Top Commenters
+        </ListSubheader>
+      }
+    >
       {topCommenters.length > 0 &&
         topCommenters.map((commenter, i) => (
           <ListItem alignItems="flex-start" key={i}>
             <ListItemAvatar>
-              <Avatar alt={commenter[0]} src="/static/images/avatar" />
+              <Avatar alt={commenter[0]} className={classes.avatar}>
+                {commenter[0].charAt(0)}
+              </Avatar>
             </ListItemAvatar>
 
             <ListItemText
@@ -52,7 +73,7 @@ const TopCommenters = ({ comments }) => {
                 <Typography
                   component="div"
                   variant="body1"
-                  className={classes.block}
+                  className={classes.inline}
                   color="textPrimary"
                 >
                   {commenter[0]}
@@ -61,11 +82,13 @@ const TopCommenters = ({ comments }) => {
               secondary={
                 <Typography
                   component="p"
-                  variant="body2"
-                  className={classes.inline}
+                  variant="overline"
+                  className={classes.count}
                   color="textPrimary"
                 >
-                  {commenter[1]}
+                  {commenter[1] === 1
+                    ? `${commenter[1]} comment`
+                    : `${commenter[1]} comments`}
                 </Typography>
               }
             />

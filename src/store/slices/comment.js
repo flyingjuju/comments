@@ -1,51 +1,65 @@
-import { createSlice, createSelector } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createAsyncThunk,
+  createSelector,
+} from "@reduxjs/toolkit";
 import { mockComments } from "../api";
+import axios from "axios";
 
 const initialState = {
-  // loading: false,
-  // hasErrors: false,
-  comment: mockComments,
+  // comment: mockComments,
+  loading: false,
+  hasErrors: false,
+  comment: [],
 };
 
 const commentSlice = createSlice({
   name: "comment",
   initialState,
   reducers: {
-    // getData: state => {
-    //   state.loading = true
-    // },
-    // getDataSuccess: (state, { payload }) => {
-    //   state.data = payload
-    //   state.loading = false
-    //   state.hasErrors = false
-    // },
-    // getDataFailure: state => {
-    //   state.loading = false
-    //   state.hasErrors = true
-    // },
-    // create: {
-    //   reducer(state, {payload}) {
-    //       console.log('heer',payload,'state',state)
-    //       const {name, comment} = payload;
-    //       state.push({name,comment})
-    //     }
-
-    // }
+    getComment: (state) => {
+      state.loading = true;
+    },
+    getCommentSuccess: (state, { payload }) => {
+      state.comment = payload;
+      state.loading = false;
+      state.hasErrors = false;
+    },
+    getCommentFailure: (state) => {
+      state.loading = false;
+      state.hasErrors = true;
+    },
     create(state, { payload }) {
       console.log("here", payload, "state", state);
-      const { name, comment } = payload;
-      state.comment.push({ name, comment });
+      const { name, body } = payload;
+      state.comment.push({ name, body });
     },
   },
 });
 
-// const getSlice = (state) => state[name] || {};
-
-// export const getViewCommentsModalOpen = createSelector(
-//   getSlice,
-//   (slice) => slice.commentsModalOpen
-// );
 export const commentSelector = (state) => state.comment;
-export const { create } = commentSlice.actions;
-// export const { openCommentsModal, closeCommentsModal } = viewSlice.actions;
+export const {
+  create,
+  getComment,
+  getCommentSuccess,
+  getCommentFailure,
+} = commentSlice.actions;
 export default commentSlice.reducer;
+
+export const fetchRandomComments = () => {
+  return async (dispath) => {
+    dispath(getComment());
+
+    try {
+      const response = await axios.get(
+        "https://jsonplaceholder.typicode.com/comments"
+      );
+      console.log("api data", response.data);
+      const { data } = await response;
+      dispath(getCommentSuccess(data.slice(0, 10)));
+    } catch (err) {
+      console.log("api error", err);
+      dispath(getCommentFailure());
+    }
+  };
+};

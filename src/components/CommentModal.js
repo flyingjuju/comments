@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: "40%",
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(5),
+    padding: theme.spacing(5, 7),
   },
   block: {
     display: "block",
@@ -38,22 +38,21 @@ const useStyles = makeStyles((theme) => ({
 const CommentModal = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-
   const isOpen = useSelector(getViewCommentsModalOpen);
 
   const handleClose = () => dispatch(closeCommentsModal());
 
   const addComment = (e) => {
-    e.preventDefault();
-    const name = document.getElementById("name").value;
-    const comment = document.getElementById("comment").value;
-    console.log(name, comment);
-    dispatch(create({ name, comment }));
-    handleClose();
+    // e.preventDefault();
+    const name = document.getElementById("name").value.trim();
+    const body = document.getElementById("comment").value;
+    // console.log(name, body);
+    if (name.length > 0 && body.length > 0) {
+      dispatch(create({ name, body }));
+      handleClose();
+    }
   };
   return (
-    // <div className={classes.root}>
-
     <Modal
       open={isOpen}
       onClose={handleClose}
@@ -61,16 +60,18 @@ const CommentModal = () => {
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
-      <div className={classes.paper}>
+      <form className={classes.paper}>
         <TextField required id="name" label="Name" className={classes.block} />
         <TextField
+          multiline
+          fullWidth
+          required
           id="comment"
           label="Comment"
-          multiline
           className={classes.block}
         />
-
         <Button
+          type="submit"
           variant="contained"
           color="primary"
           className={classes.block}
@@ -78,17 +79,8 @@ const CommentModal = () => {
         >
           Send
         </Button>
-      </div>
-
-      {/* <form>
-          <label>name</label>
-          <input id="name"></input>
-          <label>comment</label>
-          <textarea id="comment"></textarea>
-          <button onClick={(e) => addComment(e)}>submit</button>
-        </form> */}
+      </form>
     </Modal>
-    // </div>
   );
 };
 
