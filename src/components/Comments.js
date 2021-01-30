@@ -58,6 +58,7 @@ const Comment = ({ comments }) => {
                   className={classes.inline}
                   color="textPrimary"
                 >
+                  {/* switch from local data to api data */}
                   {/* {comment.comment} */}
                   {comment.body}
                 </Typography>

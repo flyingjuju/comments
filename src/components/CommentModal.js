@@ -42,7 +42,7 @@ const CommentModal = () => {
 
   const handleClose = () => dispatch(closeCommentsModal());
 
-  // use native form validation by adding required attribut to the input
+  // use native form validation by adding required attribute to inputs
   // when inputs are valid, add new comment entry to list
   // letter shall be sensitive in this case
   const addComment = (e) => {

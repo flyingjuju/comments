@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// calculate top commenters by creating commenters obj and setting commenter name as the key and freqrency as the value.
+// calculate top commenters by creating commenters object and setting commenter name as the key and freqrency as the value.
 const TopCommenters = ({ comments }) => {
   const classes = useStyles();
 
@@ -87,6 +87,7 @@ const TopCommenters = ({ comments }) => {
                   className={classes.count}
                   color="textPrimary"
                 >
+                  {/* handle plural*/}
                   {commenter[1] === 1
                     ? `${commenter[1]} comment`
                     : `${commenter[1]} comments`}
