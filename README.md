@@ -9,9 +9,9 @@ This commentor app allows users to read a list of comments, add a comment, and s
 - Top commentor list will automatically calculate the top three commentors, and display the avatar(initial for the first name of the commentor), name and comment counts for each top commentor.
 
 ## Get Started
-1. to install all packages
+1. to install all packages: 
    run  `npm install`
-2. to start application
+2. to start application: 
    run  `yarn start`
 
 
